@@ -1,0 +1,51 @@
+<h1 class="subheader">Peliculas</h1>
+<h2>{{titulo}}</h2>
+<button (click)="cambiarTitulo()">Pulsamé</button>
+<hr>
+
+<h2>Mostrar primera pelicula</h2>
+{{ peliculas[0].title }}
+
+<hr>
+
+<h2>Numero de peliculas</h2>
+
+<div *ngIf="peliculas.length <= 3">
+    Hay pocas peliculas
+</div>
+
+<div *ngIf="peliculas.length > 3">
+    Hay muchas peliculas
+</div>
+{{ peliculas.length }}
+
+<hr>
+
+<h2 class="subheader">Listado de Peliculas</h2>
+<div id="articles" *ngIf="peliculas">
+
+    <article class="article-item" *ngFor="let pelicula of peliculas; let i = index">
+        <div class="image-wrap">
+            <img src="{{ pelicula.image }}" alt="{{ pelicula.title }}" />
+        </div>
+
+        <h2>{{ pelicula.title }}</h2>
+        <span class="date">
+            Hace 5 minutos
+        </span>
+
+        <span class="year" [ngClass]="{
+            'year-green': pelicula.year > 2016,
+            'year-red': pelicula.year < 2016
+        }">
+            {{ pelicula.year }}
+        </span>
+
+        <a href="#">Leer más</a>
+
+        <div class="clearfix"></div>
+    </article>
+
+    <!--AÑADIR ARTICULOS VIA JS-->
+
+</div>

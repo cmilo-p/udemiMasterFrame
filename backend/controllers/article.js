@@ -304,6 +304,8 @@ var controller = {
         var searchString = req.params.search;
 
         // Find $or (Metodo para buscar en la DB, segun varios parametros)
+        // $regex = expresiones regular, se utilizan para describir el uso de una sola cadena, en línea con coincidencia sintáctica.
+        // $options: "i" = la 'i' es para indicar que no distinge entre mayusculas y minusculas.
         Article.find({
             "$or": [
                 { "title": { "$regex": searchString, "$options": "i" } },

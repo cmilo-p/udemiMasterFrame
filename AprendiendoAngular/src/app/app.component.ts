@@ -7,5 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public title = 'AprendiendoAngular';
-  public homeText = 'Bienvenido al Curso de Angular con Víctor Robles de victorroblesweb.es'
 }

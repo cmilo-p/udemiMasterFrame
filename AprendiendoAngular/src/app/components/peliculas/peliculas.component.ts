@@ -10,6 +10,8 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
 
   public titulo: String;
   public peliculas: Pelicula[];
+  public favorita!: Pelicula;
+  public fecha: any;
 
   constructor() {
     this.titulo = "Componente Peliculas";
@@ -18,7 +20,8 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
       new Pelicula("Los Vengadores EndGame", 2018, ""),
       new Pelicula("Batman vs Superman", 2015, ""),
       new Pelicula("Batman 2", 2011, "")
-    ]
+    ];
+    this.fecha = new Date(2020, 8, 12);
   }
 
   ngOnInit(): void {
@@ -36,6 +39,10 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
 
   ngOnDestroy(): void {
     console.log("EL COMPONENTE SE VA A ELIMINAR");
+  }
+
+  mostrarFavorita(event: any) {
+    this.favorita = event.pelicula;
   }
 
 }

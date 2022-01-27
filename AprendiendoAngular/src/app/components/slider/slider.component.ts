@@ -8,9 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SliderComponent implements OnInit {
 
   @Input() public nombre: string;
+  @Input() public size: string;
 
   constructor() {
     this.nombre = "";
+    this.size = "";
    }
 
   ngOnInit(): void {

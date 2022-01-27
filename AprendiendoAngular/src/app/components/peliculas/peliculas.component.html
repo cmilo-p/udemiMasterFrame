@@ -1,51 +1,53 @@
-<h1 class="subheader">Peliculas</h1>
-<h2>{{titulo}}</h2>
-<button (click)="cambiarTitulo()">Pulsamé</button>
-<hr>
+<app-slider [nombre]="'Peliculas'" [size]="'small'">
+</app-slider>
 
-<h2>Mostrar primera pelicula</h2>
-{{ peliculas[0].title }}
+<div class="center">
+    <section id="content">
 
-<hr>
-
-<h2>Numero de peliculas</h2>
-
-<div *ngIf="peliculas.length <= 3">
-    Hay pocas peliculas
-</div>
-
-<div *ngIf="peliculas.length > 3">
-    Hay muchas peliculas
-</div>
-{{ peliculas.length }}
-
-<hr>
-
-<h2 class="subheader">Listado de Peliculas</h2>
-<div id="articles" *ngIf="peliculas">
-
-    <article class="article-item" *ngFor="let pelicula of peliculas; let i = index">
-        <div class="image-wrap">
-            <img src="{{ pelicula.image }}" alt="{{ pelicula.title }}" />
+        <div id="favorita" *ngIf="favorita">
+            <h2 class="subheader">Pelicula favorita</h2>
+            <h4>{{ favorita.title | lowercase }}</h4>
+            <h4>{{ favorita.year | espar }}</h4>
+            <h5>{{ this.fecha | date: 'dd/MM/yyyy' }}</h5>
         </div>
 
-        <h2>{{ pelicula.title }}</h2>
-        <span class="date">
-            Hace 5 minutos
-        </span>
+        <h1 class="subheader">Peliculas</h1>
 
-        <span class="year" [ngClass]="{
-            'year-green': pelicula.year > 2016,
-            'year-red': pelicula.year < 2016
-        }">
-            {{ pelicula.year }}
-        </span>
+        <!-- 
+        <h2>{{titulo}}</h2>
+        <button (click)="cambiarTitulo()">Pulsamé</button>
+        <hr>
 
-        <a href="#">Leer más</a>
+        <h2>Mostrar primera pelicula</h2>
+        {{ peliculas[0].title }}
 
-        <div class="clearfix"></div>
-    </article>
+        <hr>
 
-    <!--AÑADIR ARTICULOS VIA JS-->
+        <h2>Numero de peliculas</h2>
 
+        <div *ngIf="peliculas.length <= 3">
+            Hay pocas peliculas
+        </div>
+
+        <div *ngIf="peliculas.length > 3">
+            Hay muchas peliculas
+        </div>
+        {{ peliculas.length }}
+
+        <hr>
+        <h2 class="subheader">Listado de Peliculas</h2>
+ -->
+
+        <div id="articles" *ngIf="peliculas">
+
+            <div *ngFor="let pelicula of peliculas; let i = index">
+
+                <app-pelicula [pelicula]="pelicula" (MarcarFavorita)="mostrarFavorita($event)">
+                </app-pelicula>
+
+            </div>
+        </div>
+
+    </section>
+    <app-sidebar></app-sidebar>
 </div>

@@ -1,10 +1,12 @@
 import { Component, OnInit, DoCheck, OnDestroy } from '@angular/core';
+import { PeliculaService } from 'src/app/services/pelicula.service';
 import { Pelicula } from 'src/app/models/pelicula';
 
 @Component({
   selector: 'peliculas',
   templateUrl: './peliculas.component.html',
-  styleUrls: ['./peliculas.component.css']
+  styleUrls: ['./peliculas.component.css'],
+  providers: [PeliculaService]
 })
 export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
 
@@ -13,20 +15,18 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
   public favorita!: Pelicula;
   public fecha: any;
 
-  constructor() {
+  constructor(
+    private _peliculaService: PeliculaService
+  ) {
     this.titulo = "Componente Peliculas";
-    this.peliculas = [
-      new Pelicula("Spiderman 4", 2019, ""),
-      new Pelicula("Los Vengadores EndGame", 2018, ""),
-      new Pelicula("Batman vs Superman", 2015, ""),
-      new Pelicula("Batman 2", 2011, "")
-    ];
+    this.peliculas = this._peliculaService.getPeliculas();
     this.fecha = new Date(2020, 8, 12);
   }
 
   ngOnInit(): void {
     console.log(this.peliculas);
     console.log("Componente Iniciado!!");
+    console.log(this._peliculaService.holaMundo());
   }
 
   ngDoCheck(): void {

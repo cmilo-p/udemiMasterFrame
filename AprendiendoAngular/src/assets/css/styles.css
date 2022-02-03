@@ -275,6 +275,14 @@ body {
     background: black;
 }
 
+.btn-disabled {
+    background: #444;
+}
+
+.btn-disabled:hover {
+    background: rgb(41, 40, 40);
+}
+
 .mid-form {
     width: 50%;
     margin: 0px auto;

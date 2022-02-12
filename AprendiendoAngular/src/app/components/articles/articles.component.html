@@ -1,6 +1,9 @@
 <div class="loading" *ngIf="!articles">
     Cargando...
+</div>
 
+<div class="loading" *ngIf="articles && articles.length == 0 ">
+    No hay articulos para mostrar, intentalo mas tarde
 </div>
 
 <div id="articles" *ngIf="articles">

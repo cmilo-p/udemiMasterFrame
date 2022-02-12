@@ -14,7 +14,7 @@ router.get('/test-de-controlador', ArticleController.test);
 //Rutas útiles
 router.post('/save', ArticleController.save);
 
-//parámetro terminado en '/?' es para indicar que la ruta no es opcional
+//parámetro terminado en '/?' es para indicar que la ruta es opcional
 router.get('/articles/:last?', ArticleController.getArticles);
 router.get('/article/:id', ArticleController.getArticle);
 router.put('/article/:id', ArticleController.update);

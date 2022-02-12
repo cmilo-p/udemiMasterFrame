@@ -4,7 +4,8 @@ export class Article {
         public _id: string,
         public title: string,
         public image: string,
-        public date: any
+        public date: any,
+        public content: string
     ) { }
 
 }

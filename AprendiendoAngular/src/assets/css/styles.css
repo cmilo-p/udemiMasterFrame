@@ -265,6 +265,7 @@ body {
     transition: 300ms all;
     border: none;
     cursor: pointer;
+    text-align: center;
 }
 
 .btn-success {
@@ -273,6 +274,27 @@ body {
 
 .btn-success:hover {
     background: black;
+}
+
+.btn-warning {
+    background: rgb(238, 165, 6);
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.btn-danger {
+    background: rgb(201, 21, 21);
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.btn-warning:hover,
+.btn-danger:hover {
+    opacity: 0.8 ;
+}
+
+.buttons {
+    margin-top: 30px;
 }
 
 .btn-disabled {

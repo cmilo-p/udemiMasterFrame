@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import swal from 'sweetalert2';
 import { Article } from 'src/app/models/Article';
 import { ArticleService } from 'src/app/services/article.service';
 import { Global } from 'src/app/services/global';
@@ -63,6 +64,14 @@ export class ArticleNewComponent implements OnInit {
           if (response.status == 'success') {
             this.status = response.success;
             this.article = response.article;
+
+            //Alerta
+            swal.fire(
+              'Articulo creado!!',
+              'El artculo se ha creado correctamente',
+              'success'
+            )
+
             this._router.navigate(['/blog']);
           } else {
             this.status = response.error;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import swal from 'sweetalert2';
 import { ArticleService } from 'src/app/services/article.service';
 import { Article } from 'src/app/models/Article';
 import { Global } from 'src/app/services/global';
@@ -51,17 +52,46 @@ export class ArticleComponent implements OnInit {
   }
 
   delete(id: any) {
-    this._articleServices.delete(id).subscribe(
-      {
-        next: (response) => { 
-          this._router.navigate(['/blog']);
-        },
-        error: (error) => {
-          console.log(error);
-          this._router.navigate(['/blog']);
-        }
+
+    swal.fire({
+      title: '¿Estas Seguro?',
+      text: "Una vez borrado el articulo no podrás recuperrarlo!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //Peticion AJAX
+        this._articleServices.delete(id).subscribe(
+          {
+            next: (response) => {
+              //Alerta
+              swal.fire(
+                'Deleted!',
+                'El articulo ha sido borrado!!',
+                'success'
+              );
+              this._router.navigate(['/blog']);
+            },
+            error: (error) => {
+              console.log(error);
+              this._router.navigate(['/blog']);
+            }
+          }
+        );
+      } else {
+        swal.fire(
+          'Deleted!',
+          'Tranquilo nada se ha borrado',
+          'error'
+        );
       }
-    );
+    })
+
+
+
   }
 
 }

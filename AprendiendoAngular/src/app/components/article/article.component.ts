@@ -18,10 +18,10 @@ export class ArticleComponent implements OnInit {
   constructor(
     private _articleServices: ArticleService,
     private _route: ActivatedRoute,
-    private _rotuter: Router
-  ) { 
+    private _router: Router
+  ) {
     this.url = Global.url;
-    this.article = new Article('0','','','','',);
+    this.article = new Article('0', '', '', '', '',);
   }
 
   ngOnInit(): void {
@@ -36,18 +36,32 @@ export class ArticleComponent implements OnInit {
             if (response.article) {
               this.article = response.article;
             } else {
-              this._rotuter.navigate(['/home']);
+              this._router.navigate(['/home']);
             }
           },
           error: (error) => {
             console.log(error);
-            this._rotuter.navigate(['/home']);
+            this._router.navigate(['/home']);
           }
         }
-      )
+      );
 
     });
 
+  }
+
+  delete(id: any) {
+    this._articleServices.delete(id).subscribe(
+      {
+        next: (response) => { 
+          this._router.navigate(['/blog']);
+        },
+        error: (error) => {
+          console.log(error);
+          this._router.navigate(['/blog']);
+        }
+      }
+    );
   }
 
 }

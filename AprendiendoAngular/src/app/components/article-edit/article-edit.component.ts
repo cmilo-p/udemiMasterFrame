@@ -5,12 +5,12 @@ import { ArticleService } from 'src/app/services/article.service';
 import { Global } from 'src/app/services/global';
 
 @Component({
-  selector: 'app-article-new',
-  templateUrl: './article-new.component.html',
-  styleUrls: ['./article-new.component.css'],
+  selector: 'app-article-edit',
+  templateUrl: '../article-new/article-new.component.html',
+  styleUrls: ['./article-edit.component.css'],
   providers: [ArticleService]
 })
-export class ArticleNewComponent implements OnInit {
+export class ArticleEditComponent implements OnInit {
 
   public article: Article;
   public status: string;
@@ -49,21 +49,22 @@ export class ArticleNewComponent implements OnInit {
     this.article = new Article('', '', '', '', null);
     this.status = '';
     this.url = Global.url;
-    this.is_edit = false;
-    this.page_title = 'Crear articulo';
+    this.is_edit = true;
+    this.page_title = 'Editar articulo  ';
   }
 
   ngOnInit(): void {
+    this.getArticle();
   }
 
   onSubmit() {
-    this._articleServices.create(this.article).subscribe(
+    this._articleServices.update(this.article._id, this.article).subscribe(
       {
         next: (response) => {
           if (response.status == 'success') {
             this.status = response.success;
             this.article = response.article;
-            this._router.navigate(['/blog']);
+            this._router.navigate(['/blog/articulo', this.article._id]);
           } else {
             this.status = response.error;
           }
@@ -79,6 +80,30 @@ export class ArticleNewComponent implements OnInit {
   imageUpload(data: any) {
     let image_data = data.body.image;
     this.article.image = image_data;
+  }
+
+  getArticle() {
+    this._route.params.subscribe(params => {
+
+      let id = params['id'];
+
+      this._articleServices.getArticle(id).subscribe(
+        {
+          next: (response) => {
+            if (response.article) {
+              this.article = response.article;
+            } else {
+              this._router.navigate(['/home']);
+            }
+          },
+          error: (error) => {
+            console.log(error);
+            this._router.navigate(['/home']);
+          }
+        }
+      );
+
+    });
   }
 
 }

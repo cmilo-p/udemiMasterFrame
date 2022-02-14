@@ -9,6 +9,7 @@ import { PeliculasComponent } from './components/peliculas/peliculas.component';
 import { ArticleComponent } from './components/article/article.component';
 import { SearchComponent } from './components/search/search.component';
 import { ArticleNewComponent } from './components/article-new/article-new.component';
+import { ArticleEditComponent } from './components/article-edit/article-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'blog', component: BlogComponent },
   { path: 'blog/articulo/:id', component: ArticleComponent },
   { path: 'blog/crear', component: ArticleNewComponent },
+  { path: 'blog/editar/:id', component: ArticleEditComponent },
   { path: 'buscar/:search', component: SearchComponent },
   { path: 'formulario', component: FormularioComponent },
   { path: 'peliculas', component: PeliculasComponent },
